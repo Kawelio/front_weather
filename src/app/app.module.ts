@@ -23,7 +23,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 		AppComponent
 	],
 	imports: [
-		ReactiveFormsModule,
 		HttpModule,
 		HttpClientModule,
 		RouterModule,
