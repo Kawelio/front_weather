@@ -105,6 +105,7 @@ const MATERIAL_MODULES = [
 	exports: [
 		MATERIAL_MODULES,
 		CommonModule,
+		FormsModule,
 		ReactiveFormsModule,
 		RouterModule,
 		TranslateModule,
