@@ -8,13 +8,17 @@ import { AppService } from 'app/app.service'
 })
 export class AppComponent {
 
-  public city        = ''
-  public weatherCity = null
+  public city             = ''
+  public date             = ''
+  public weatherCity      = null
+  public weatherPollution = null
+  public error
 
   constructor(private appService: AppService) {
 
   }
 
+  // Weather
   public getWeatherByCity() {
 
     this.weatherCity = null
@@ -24,6 +28,28 @@ export class AppComponent {
           console.log(data)
           this.weatherCity = data
         })
+  }
+
+  // Pollution
+  public getWeatherPollutionByCity() {
+
+    this.weatherCity = null
+
+    if (this.date) {
+
+      this.appService.getWeatherByCity(this.city)
+          .subscribe((weatherData) => {
+            this.weatherCity = weatherData
+
+            this.appService.getWeatherPollutionByCity(weatherData, this.date)
+                .subscribe((data) => {
+                  this.weatherPollution = data
+                })
+          })
+
+    } else {
+      this.error = 'Choose a date !'
+    }
   }
 
 }

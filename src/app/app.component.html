@@ -11,7 +11,10 @@
 
   <!--DATE-->
   <mat-form-field>
-    <input matInput [mdDatepicker]="picker" placeholder="Choose a date">
+    <input matInput
+           [mdDatepicker]="picker"
+           [(ngModel)]="date"
+           placeholder="Choose a date">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
@@ -20,12 +23,24 @@
   <button mat-raised-button
           (click)="getWeatherByCity()"
           color="primary">
-    Send
+    Weather
+  </button>
+
+  <!--Send button-->
+  <button mat-raised-button
+          (click)="getWeatherPollutionByCity()"
+          color="primary">
+    Weather/Pollution
   </button>
 
   <div *ngIf="weatherCity"
        class="infos">
     Il fait {{ weatherCity.main.temp}}º à {{weatherCity.name}} !!
+  </div>
+
+  <div *ngIf="error"
+       class="error">
+    <span>{{error}}</span>
   </div>
 
 </div>

@@ -11,9 +11,19 @@ export class AppService {
 
   public getWeatherByCity(cityName): Observable<any> {
 
-    const url = `/api/weather`
+    const url = `/api_weather/weather`
 
     return this.http.post(url, {city: cityName})
+               .map((res: Response) => {
+                 return res.json().weather
+               })
+  }
+
+  public getWeatherPollutionByCity(weatherData, datePollution): Observable<any> {
+
+    const url = `/api_pollution/weather`
+
+    return this.http.post(url, {data: weatherData, date: datePollution})
                .map((res: Response) => {
                  return res.json().weather
                })
