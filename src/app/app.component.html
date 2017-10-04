@@ -1,46 +1,95 @@
 <div class="weather_content">
 
-  <h1>Weather / Pollution</h1>
+  <h1>Weather / Alert / Pollution</h1>
 
-  <!--Input city-->
-  <mat-form-field class="example-full-width">
-    <input matInput
-           [(ngModel)]="city"
-           placeholder="City">
-  </mat-form-field>
+  <mat-accordion>
 
-  <!--DATE-->
-  <mat-form-field>
-    <input matInput
-           [mdDatepicker]="picker"
-           [(ngModel)]="date"
-           placeholder="Choose a date">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Voir la météo
+      </mat-expansion-panel-header>
 
-  <!--Send button-->
-  <button mat-raised-button
-          (click)="getWeatherByCity()"
-          color="primary">
-    Weather
-  </button>
+      <div class="weather_content">
+        <!-- City input -->
+        <mat-form-field>
+          <input matInput
+                 [(ngModel)]="city"
+                 placeholder="City">
+        </mat-form-field>
+        <!-- Date input -->
+        <mat-form-field>
+          <input matInput
+                 [mdDatepicker]="picker"
+                 [(ngModel)]="date"
+                 placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix
+                                 [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <!--Send button-->
+        <button mat-raised-button
+                (click)="getWeatherByCity()"
+                color="primary">
+          Weather
+        </button>
 
-  <!--Send button-->
-  <button mat-raised-button
-          (click)="getWeatherPollutionByCity()"
-          color="primary">
-    Weather/Pollution
-  </button>
+        <!--Send button-->
+        <button mat-raised-button
+                (click)="getWeatherPollutionByCity()"
+                color="primary">
+          Weather/Pollution
+        </button>
 
-  <div *ngIf="weatherCity"
-       class="infos">
-    Il fait {{ weatherCity.main.temp}}º à {{weatherCity.name}} !!
-  </div>
+        <div *ngIf="weatherCity"
+             class="infos">
+          Il fait {{ weatherCity.main.temp}}º à {{weatherCity.name}} !!
+        </div>
 
-  <div *ngIf="error"
-       class="error">
-    <span>{{error}}</span>
-  </div>
+        <div *ngIf="error"
+             class="error">
+          <span>{{error}}</span>
+        </div>
+      </div>
 
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Avertir d'un vol de vélo
+      </mat-expansion-panel-header>
+
+      <div class="weather_content">
+        <!-- City input -->
+        <mat-form-field>
+          <input matInput
+                 [(ngModel)]="bicycleCity"
+                 placeholder="City">
+        </mat-form-field>
+        <!-- Time input -->
+        <mat-form-field>
+          <input matInput
+                 [(ngModel)]="time"
+                 placeholder="Time">
+        </mat-form-field>
+        <!-- Day input -->
+        <mat-form-field>
+          <input matInput
+                 [mdDatepicker]="bicyclePicker"
+                 placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix
+                                 [for]="bicyclePicker"></mat-datepicker-toggle>
+          <mat-datepicker #bicyclePicker></mat-datepicker>
+        </mat-form-field>
+        <!-- Sending button -->
+        <button mat-raised-button
+                (click)="getWeatherByCity()"
+                color="primary">
+          ENVOYER
+        </button>
+
+      </div>
+
+    </mat-expansion-panel>
+
+  </mat-accordion>
 </div>

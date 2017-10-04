@@ -1,25 +1,37 @@
 :host {
-  position: relative;
+  // position: relative;
   display: flex;
-  overflow: hidden;
-  margin: 10px;
-  padding-top: 56px;
-
-  .weather_content {
-    width: 100%;
+  flex-flow: column nowrap;
+  height: 100%;
+  background-color: #d8d8d8;
+  .content {
     display: flex;
-    flex-direction: column;
-    button {
-      margin-top: 10px;
-      width: 200px;
-    }
-  }
-  .infos {
-    margin: 50px 10px;
-    padding: 10px;
-    display: flex;
+    align-items: center;
+    align-self: center;
+    flex-flow: column nowrap;
     justify-content: center;
-    border: 1px solid black;
+    margin-top: 150px;
+    width: 80%;
+    mat-accordion {
+      width: 100%;
+      .weather_content,
+      .bicycle_alert {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        button {
+          margin-top: 10px;
+          width: 200px;
+        }
+      }
+      .infos {
+        display: flex;
+        justify-content: center;
+        margin: 50px 10px;
+        padding: 10px;
+        border: 1px solid black;
+      }
+    }
   }
   .error {
     margin: 50px 10px;
