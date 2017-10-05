@@ -10,7 +10,7 @@ export class AppService {
 	constructor(private http: Http) { }
 
 	public getWeatherByCity(cityName): Observable<any> {
-		const url = `/api/weather`
+		const url = `/api_pollution/weather`
 
 		return this.http.post(url, { city: cityName })
 			.map((res: Response) => {
