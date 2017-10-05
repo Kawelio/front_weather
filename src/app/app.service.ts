@@ -1,33 +1,45 @@
-import 'rxjs/add/operator/map'
-
 import { Injectable } from '@angular/core'
-import { Headers, Http, RequestOptions, Response } from '@angular/http'
+import { Http, Response } from '@angular/http'
+import 'rxjs/add/operator/map'
 import { Observable } from 'rxjs/Observable'
 
 @Injectable()
 export class AppService {
 
-	constructor(private http: Http) { }
+  constructor(private http: Http) { }
 
-	public getWeatherByCity(cityName): Observable<any> {
-		const url = `/api_pollution/weather`
+  public getWeatherByCity(cityName): Observable<any> {
+    const url = `/api_weather/weather`
 
-		return this.http.post(url, { city: cityName })
-			.map((res: Response) => {
-				return res.json().weather
-			})
-	}
+    return this.http.post(url, { city: cityName })
+               .map((res: Response) => {
+                 return res.json().weather
+               })
+  }
 
-	public sendBicycleTheftAlert(cityName, bTime, bDate): Observable<any> {
-		const url = `/api/bicycle/alert`
+  public getWeatherPollutionByCity(weatherData, datePollution): Observable<any> {
 
-		return this.http.post(url, {
-			city: cityName,
-			time: bTime,
-			date: bDate
-		})
-			.map((res: Response) => {
-				return res.json()
-			})
-	}
+    const url = `/api_pollution/weather`
+
+    return this.http.post(url, {
+      data: weatherData,
+      date: datePollution
+    })
+               .map((res: Response) => {
+                 return res.json().weather
+               })
+  }
+
+  public sendBicycleTheftAlert(cityName, bTime, bDate): Observable<any> {
+    const url = `/api/bicycle/alert`
+
+    return this.http.post(url, {
+      city: cityName,
+      time: bTime,
+      date: bDate
+    })
+               .map((res: Response) => {
+                 return res.json()
+               })
+  }
 }

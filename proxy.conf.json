@@ -1,6 +1,10 @@
 {
-  "/api": {
+  "/api_weather": {
     "target": "http://localhost:3003",
+    "secure": false
+  },
+  "/api_pollution": {
+    "target": "http://localhost:3004",
     "secure": false
   }
 }
