@@ -74,6 +74,7 @@
         <!-- Day input -->
         <mat-form-field>
           <input matInput
+                 [(ngModel)]="theftDate"
                  [mdDatepicker]="bicyclePicker"
                  placeholder="Choose a date">
           <mat-datepicker-toggle matSuffix
@@ -82,14 +83,23 @@
         </mat-form-field>
         <!-- Sending button -->
         <button mat-raised-button
-                (click)="getWeatherByCity()"
+                (click)="sendBicycleTheftAlert()"
                 color="primary">
           ENVOYER
         </button>
 
       </div>
-
     </mat-expansion-panel>
+
+    <div class="theftBicycle">
+      <h2>Theft Bicycle list</h2>
+      <mat-list>
+        <mat-list-item *ngFor="let bicycle of listTheftBicycle"
+                       class="theftItem">
+          {{bicycle.city}} {{bicycle.theftTime}} {{bicycle.theftDate}}
+        </mat-list-item>
+      </mat-list>
+    </div>
 
   </mat-accordion>
 </div>

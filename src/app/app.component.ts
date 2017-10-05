@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { AppService } from 'app/app.service'
 import 'rxjs/add/operator/filter'
 import 'rxjs/add/operator/takeUntil'
@@ -9,7 +9,7 @@ import { Subject } from 'rxjs/Subject'
   templateUrl: './app.component.html',
   styleUrls:   ['./app.component.scss']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
 
   // HTML variables
   // Weather
@@ -17,7 +17,9 @@ export class AppComponent implements OnDestroy {
   public weatherCity                   = null
   public weatherPollution              = null
   // Bicycle alert
+  public listTheftBicycle              = ''
   public bicycleCity                   = ''
+  public theftDate                     = ''
   public time                          = ''
   public date                          = ''
   public error
@@ -26,6 +28,11 @@ export class AppComponent implements OnDestroy {
 
   constructor(private appService: AppService) {
 
+  }
+
+  public ngOnInit() {
+
+    this.refreshTheft()
   }
 
   // Weather
@@ -63,16 +70,23 @@ export class AppComponent implements OnDestroy {
   }
 
   public sendBicycleTheftAlert() {
-    this.appService.sendBicycleTheftAlert(this.bicycleCity, this.time, this.date)
+    this.appService.sendBicycleTheftAlert(this.bicycleCity, this.time, this.theftDate)
         .takeUntil(this.ngUnsubscribe)
         .subscribe((data) => {
           console.log(data)
-          //  this.any = data
+          this.refreshTheft()
         })
   }
 
   public ngOnDestroy() {
     this.ngUnsubscribe.next()
     this.ngUnsubscribe.complete()
+  }
+
+  private refreshTheft() {
+    this.appService.getBicycleTheftAlert()
+        .subscribe((bicycles) => {
+          this.listTheftBicycle = bicycles
+        })
   }
 }

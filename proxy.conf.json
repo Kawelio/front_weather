@@ -6,5 +6,9 @@
   "/api_pollution": {
     "target": "http://localhost:3004",
     "secure": false
+  },
+  "/api_bicycle": {
+    "target": "http://localhost:3005",
+    "secure": false
   }
 }

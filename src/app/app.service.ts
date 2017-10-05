@@ -31,15 +31,24 @@ export class AppService {
   }
 
   public sendBicycleTheftAlert(cityName, bTime, bDate): Observable<any> {
-    const url = `/api/bicycle/alert`
+    const url = `/api_bicycle/bicycle/alert`
 
     return this.http.post(url, {
-      city: cityName,
-      time: bTime,
-      date: bDate
+      city:      cityName,
+      theftTime: bTime,
+      theftDate: bDate
     })
                .map((res: Response) => {
                  return res.json()
+               })
+  }
+
+  public getBicycleTheftAlert(): Observable<any> {
+    const url = `/api_bicycle/bicycle`
+
+    return this.http.get(url)
+               .map((res: Response) => {
+                 return res.json().bicycle
                })
   }
 }
